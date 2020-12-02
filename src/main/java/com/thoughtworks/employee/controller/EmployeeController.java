@@ -3,9 +3,9 @@ package com.thoughtworks.employee.controller;
 import com.thoughtworks.employee.entity.Employee;
 import com.thoughtworks.employee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,6 +17,40 @@ public class EmployeeController {
 
     @GetMapping
     public List<Employee> getEmployees() {
-        return employeeService.getEmployees();
+        return employeeService.getAll();
+    }
+
+    @GetMapping(params = {"page", "pageSize"})
+    public Page<Employee> getPaginatedAll(
+            @RequestParam(required = false) Integer page,
+            @RequestParam(required = false) Integer pageSize
+    ) {
+        return employeeService.getAll(page, pageSize);
+    }
+
+    @GetMapping(params = "gender")
+    public List<Employee> getByGender(@RequestParam String gender) {
+        return employeeService.getByGender(gender);
+    }
+
+    @GetMapping("/{employeeId}")
+    public Employee get(@PathVariable String employeeId) {
+        return employeeService.get(employeeId);
+    }
+
+    @PostMapping
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public Employee create(@RequestBody Employee employee) {
+        return employeeService.create(employee);
+    }
+
+    @DeleteMapping("/{employeeId}")
+    public void delete(@PathVariable String employeeId) {
+        employeeService.delete(employeeId);
+    }
+
+    @PutMapping("/{employeeId}")
+    public Employee update(@PathVariable String employeeId, @RequestBody Employee employee) {
+        return employeeService.update(employeeId, employee);
     }
 }
