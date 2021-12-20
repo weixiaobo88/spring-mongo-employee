@@ -1,0 +1,15 @@
+language: java
+dist: trusty
+jdk:
+  - oraclejdk8
+before_script:
+  - "./gradlew test"
+script:
+  - "./gradlew build"
+deploy:
+  provider: heroku
+  api_key:
+    secure: jRtRHKRVV1VANOCr4StRPj594rEgR2LmQKaKEIPUCXau6bPpnNgigNF+YC6GO26oy/kYLZLtQZvs2jKPBKD8Oj0kdp6hBTzOrtWoue4nwlUTfr49BrFn0TyCLCgos6pVq01q9iBffDabQoGfzaOjSydZ11B6+wT+SkfLdfQAX5lp952dNiHSith9cekIUoeTQhCYyjYltBeFE1CEHdt+fkuk7FrqAmQnie1pS9f37IEDKjSlV3BN2HKb/Ul5JuJ7htmIasbNV0zJGhZeF26RJM0hqONQfp4ZWnu1DqAdD/3eI1F31nQXR3Sjh8EoVy6cN8M6Cibtbi1wRvjQNl79ZJQK4OJ0pkbMizjbLHfhY8G5rkXuj9uNnblmQyIOk8fo//92JQmK+7CgH9pN90UZ5zIvDPce0KzuhiIkzYCm5NvliGLfNV9iEq8kRIMqAFZEx/t4efut7FsFjLbJYAPmEaele3u3DX4Z0p4D1DFA4j7KO1mi3rxU9v5/2TocSYt4ChKtHvJbkmDiD3FWoUeyLXqYHrTrM4lY3wyfQzmGXii1sAAW0F9g4Om5oOFV+06TzZmCANbmVoGybTmo8NBfs7lUWxUPhLh2HBffi1bJuLlYpdgAA+vq8DwhbhLgwcromD4hkVQHOurHfYJ3mYkvknsFpo70H18iR2BKsBxBN1A=
+  app: spring-mongo-employee
+  true:
+    repo: spring-mongo-employee
