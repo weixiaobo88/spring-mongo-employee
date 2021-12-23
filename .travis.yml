@@ -5,9 +5,13 @@ jdk:
 before_install:
   - chmod +x gradlew
 before_script:
+  - sleep 15
+  - "./gradlew build"
   - "./gradlew test"
 script:
   - "./gradlew build"
+services:
+  - mongodb
 deploy:
   provider: heroku
   api_key:
